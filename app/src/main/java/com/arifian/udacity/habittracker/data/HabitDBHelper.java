@@ -1,9 +1,11 @@
 package com.arifian.udacity.habittracker.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.arifian.udacity.habittracker.data.HabitContract.*;
+
+import com.arifian.udacity.habittracker.data.HabitContract.HabitEntry;
 
 /**
  * Created by faqih on 23/04/17.
@@ -31,5 +33,18 @@ public class HabitDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + HabitEntry.TABLE_NAME +";");
         onCreate(db);
+    }
+
+    public Cursor getHabits(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        return db.query(
+                HabitContract.HabitEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 }

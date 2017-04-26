@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 EditText editText = (EditText) dialogView.findViewById(R.id.input_event);
-                insertPet(editText.getText().toString());
+                insertHabit(editText.getText().toString());
                 displayDatabaseInfo();
             }
         });
@@ -63,16 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayDatabaseInfo() {
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-        Cursor cursor = db.query(
-                HabitContract.HabitEntry.TABLE_NAME,   // The table to query
-                null,            // The columns to return
-                null,                  // The columns for the WHERE clause
-                null,                  // The values for the WHERE clause
-                null,                  // Don't group the rows
-                null,                  // Don't filter by row groups
-                null);                   // The sort order
+        Cursor cursor = mDbHelper.getHabits();
 
         TextView displayView = (TextView) findViewById(R.id.text_view_pet);
 
@@ -103,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void insertPet(String event) {
+    private void insertHabit(String event) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
